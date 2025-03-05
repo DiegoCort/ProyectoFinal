@@ -16,8 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.shortcuts import redirect
+
+def redirigir_a_login(request):
+    return redirect('iniciar_sesion')  # Asegúrate de que 'iniciar_sesion' es el nombre correcto en tus URLs
+
 
 urlpatterns = [
+    path('', redirigir_a_login),
     path('admin/', admin.site.urls),
     path('ligas/', include('ligas.urls')),
     path("equipos/", include("equipos.urls")),

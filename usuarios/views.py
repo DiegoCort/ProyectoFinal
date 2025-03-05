@@ -8,8 +8,9 @@ def registrar_usuario(request):
     if request.method == 'POST':
         form = UsuarioRegistroForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            login(request, user)
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data["password1"])  # Encriptar contraseña
+            user.save()
             return redirect('login')
     else:
         form = UsuarioRegistroForm()
@@ -45,9 +46,13 @@ def iniciar_sesion(request):
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
+        print(f"Intentando autenticar: {username} - {password}")
         if user is not None:
             login(request, user)
             return redirect("listar_usuarios")
+        else:
+            print("Autenticación fallida")
+            return render(request, 'usuarios/login.html', {'error': 'Usuario o contraseña incorrectos'})
     return render(request, 'usuarios/login.html')
 
 def cerrar_sesion(request):
