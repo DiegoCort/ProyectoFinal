@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Lista de Entrenamientos</h2>
+<a href="{% url 'crear_entrenamiento' %}" class="btn btn-primary">Nuevo Entrenamiento</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Equipo</th>
+            <th>Entrenador</th>
+            <th>Fecha</th>
+            <th>Duración</th>
+            <th>Objetivos</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for entrenamiento in entrenamientos %}
+        <tr>
+            <td>{{ entrenamiento.equipo }}</td>
+            <td>{{ entrenamiento.entrenador }}</td>
+            <td>{{ entrenamiento.fecha }}</td>
+            <td>{{ entrenamiento.duracion }}</td>
+            <td>{{ entrenamiento.objetivos }}</td>
+            <td>
+                <a href="{% url 'editar_entrenamiento' entrenamiento.id %}" class="btn btn-warning btn-sm">Editar</a>
+                <a href="{% url 'eliminar_entrenamiento' entrenamiento.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

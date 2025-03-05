@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Lista de Partidos</h2>
+<a href="{% url 'crear_partido' %}">Crear Nuevo Partido</a>
+<ul>
+    {% for partido in partidos %}
+        <li>
+            {{ partido.equipo_local.nombre }} vs {{ partido.equipo_visitante.nombre }} - {{ partido.fecha }}
+            ({{ partido.goles_local }} - {{ partido.goles_visitante }})
+            <a href="{% url 'editar_partido' partido.id %}">Editar</a> |
+            <a href="{% url 'eliminar_partido' partido.id %}">Eliminar</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

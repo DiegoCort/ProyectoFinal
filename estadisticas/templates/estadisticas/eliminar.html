@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>¿Estás seguro de que quieres eliminar esta estadística?</h2>
+<p>Jugador: {{ estadistica.jugador }}</p>
+<p>Partido: {{ estadistica.partido }}</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a href="{% url 'listar_estadisticas' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

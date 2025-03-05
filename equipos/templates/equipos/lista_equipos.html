@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Equipos</title>
+</head>
+<body>
+    <h2>Lista de Equipos</h2>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Liga</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for equipo in equipos %}
+                <tr>
+                    <td>{{ equipo.nombre }}</td>
+                    <td>{{ equipo.liga.nombre }}</td>
+                    <td>
+                        <a href="{% url 'editar_equipo' equipo.id %}">Editar</a> |
+                        <a href="{% url 'eliminar_equipo' equipo.id %}">Eliminar</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="3">No hay equipos registrados.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <a href="{% url 'nuevo_equipo' %}">Agregar nuevo equipo</a>
+</body>
+</html>
