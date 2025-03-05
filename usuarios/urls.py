@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import (
     registrar_usuario, listar_usuarios, editar_usuario, eliminar_usuario,
-    iniciar_sesion, cerrar_sesion
+    iniciar_sesion, cerrar_sesion, vista_futbolista, vista_tecnico
 )
 
 urlpatterns = [
@@ -12,4 +12,7 @@ urlpatterns = [
     path('eliminar/<int:usuario_id>/', eliminar_usuario, name='eliminar_usuario'),
     path('login/', iniciar_sesion, name='iniciar_sesion'),
     path('logout/', cerrar_sesion, name='cerrar_sesion'),
+    path('futbolista/', vista_futbolista, name='vista_futbolista'),
+    path('tecnico/', vista_tecnico, name='vista_tecnico'),
+
 ]

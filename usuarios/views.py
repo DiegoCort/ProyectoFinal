@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from .models import Usuario
 from .forms import UsuarioRegistroForm, UsuarioEdicionForm
 
@@ -42,19 +42,49 @@ def eliminar_usuario(request, usuario_id):
     return render(request, 'usuarios/eliminar_usuario.html', {'usuario': usuario})
 
 def iniciar_sesion(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
         user = authenticate(request, username=username, password=password)
-        print(f"Intentando autenticar: {username} - {password}")
+
         if user is not None:
             login(request, user)
-            return redirect("listar_usuarios")
+            
+            # Redirigir según el rol
+            if user.rol == 'futbolista':
+                return redirect('vista_futbolista')
+            elif user.rol == 'tecnico':
+                return redirect('vista_tecnico')
+            elif user.rol == 'organizador':
+                return redirect('vista_organizador')
+            elif user.rol == 'administrador':
+                return redirect('admin:index')  # Redirige al panel de admin de Django
+            
+            return redirect('listar_usuarios')  # Redirección por defecto
         else:
-            print("Autenticación fallida")
             return render(request, 'usuarios/login.html', {'error': 'Usuario o contraseña incorrectos'})
+
     return render(request, 'usuarios/login.html')
 
 def cerrar_sesion(request):
     logout(request)
     return redirect('iniciar_sesion')
+
+def es_futbolista(user):
+    return user.rol == 'futbolista'
+
+# Función que verifica si el usuario es técnico
+def es_tecnico(user):
+    return user.rol == 'tecnico'
+
+# Vista solo accesible para futbolistas
+@login_required
+@user_passes_test(es_futbolista)
+def vista_futbolista(request):
+    return render(request, 'usuarios/futbolista.html')
+
+# Vista solo accesible para técnicos
+@login_required
+@user_passes_test(es_tecnico)
+def vista_tecnico(request):
+    return render(request, 'usuarios/tecnico.html')

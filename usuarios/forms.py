@@ -5,7 +5,7 @@ from .models import Usuario
 class UsuarioRegistroForm(UserCreationForm):
     class Meta:
         model = Usuario
-        fields = ['username', 'email', 'rol', 'password1', 'password2']
+        fields = ['username', 'email', 'rol']
 
 class UsuarioEdicionForm(UserChangeForm):
     password = None  # Para que no pida cambiar la contraseña en la edición
