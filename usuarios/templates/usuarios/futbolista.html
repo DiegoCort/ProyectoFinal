@@ -2,7 +2,11 @@
 {% block content %}
 <h2>Bienvenido, Futbolista</h2>
 <p>Aquí puedes ver tus entrenamientos y partidos.</p>
-<a href="{% url 'listar_estadisticas' %}">Ver estadísticas</a>
+<lu>
+    <li><a href="{% url 'perfil_futbolista' %}">Perfil</a></li>
+    <li><a href="{% url 'listar_estadisticas' %}">Ver estadísticas</a></li>
+</lu>
+
 <a href="{% url 'cerrar_sesion' %}">
     <button>Cerrar sesión</button>
 </a>

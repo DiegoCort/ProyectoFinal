@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil Futbolista</title>
+</head>
+<body>
+    <h1>Perfil de {{ usuario.username }}</h1>
+    <p>Nombre: {{ usuario.first_name }} {{ usuario.last_name }}</p>
+    <p>Correo: {{ usuario.email }}</p>
+
+    <a href="{% url 'vista_futbolista' %}">Volver</a>
+</body>
+</html>

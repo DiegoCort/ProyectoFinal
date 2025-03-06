@@ -92,3 +92,8 @@ def vista_futbolista(request):
 @user_passes_test(es_tecnico)
 def vista_tecnico(request):
     return render(request, 'usuarios/tecnico.html')
+
+@login_required
+def perfil_futbolista(request):
+    usuario = request.user  # Obtiene el usuario autenticado
+    return render(request, 'usuarios/perfil.html', {'usuario': usuario})
