@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import EstadisticaJugador
 from .forms import EstadisticaJugadorForm
+from django.contrib.auth.decorators import login_required
 
 # Listar estadísticas
 def listar_estadisticas(request):
@@ -37,3 +38,10 @@ def eliminar_estadistica(request, pk):
         estadistica.delete()
         return redirect('listar_estadisticas')
     return render(request, 'estadisticas/eliminar.html', {'estadistica': estadistica})
+
+@login_required
+def vista_estadisticas(request):
+    # Filtrar estadísticas solo del usuario autenticado
+    estadisticas = EstadisticaJugador.objects.filter(jugador=request.user)
+    
+    return render(request, 'estadisticas/lista_estadisticas.html', {'estadisticas': estadisticas})

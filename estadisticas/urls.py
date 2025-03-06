@@ -6,4 +6,5 @@ urlpatterns = [
     path('crear/', crear_estadistica, name='crear_estadistica'),
     path('editar/<int:pk>/', editar_estadistica, name='editar_estadistica'),
     path('eliminar/<int:pk>/', eliminar_estadistica, name='eliminar_estadistica'),
+    path('listar/', listar_estadisticas, name="vista_estadisticas"),
 ]

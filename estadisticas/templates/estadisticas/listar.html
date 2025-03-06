@@ -29,6 +29,10 @@
                 <a href="{% url 'eliminar_estadistica' estadistica.id %}" class="btn btn-danger">Eliminar</a>
             </td>
         </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3">No tienes estadísticas registradas.</td>
+        </tr>
         {% endfor %}
     </tbody>
 </table>

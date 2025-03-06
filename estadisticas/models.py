@@ -1,6 +1,6 @@
 from django.db import models
 from partidos.models import Partido
-from usuarios.models import Usuario  # Asegúrate de que existe el modelo Usuario
+from usuarios.models import Usuario  
 
 class EstadisticaJugador(models.Model):
     partido = models.ForeignKey(Partido, on_delete=models.CASCADE, null=True, blank=True)
