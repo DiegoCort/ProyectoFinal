@@ -10,8 +10,11 @@
         <h1>Gestión de Ligas de Fútbol</h1>
         <nav>
             <li><a href="{% url 'equipos:lista' %}">Equipos</a></li>
-            <li><a href="{% url 'lista_ligas' %}"></a>Ligas</li>
-            <li><a href="{% url 'listar_estadisticas' %}">Estadísticas</a></li>
+            <li><a href="{% url 'lista_ligas' %}">Ligas</a></li>
+        
+            {% if not es_futbolista %}
+                <li><a href="{% url 'listar_estadisticas' %}">Estadísticas</a></li>
+            {% endif %}
         </nav>
     </header>
     <main>

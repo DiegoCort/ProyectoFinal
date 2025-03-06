@@ -18,7 +18,11 @@ def registrar_usuario(request):
 
 @login_required
 def listar_usuarios(request):
-    usuarios = Usuario.objects.all()
+    if request.user.rol == 'administrador':
+        usuarios = Usuario.objects.all()  # Admin puede ver todos los usuarios
+    else:
+        usuarios = Usuario.objects.filter(id=request.user.id)  # Solo ve su propio perfil
+
     return render(request, 'usuarios/lista_usuarios.html', {'usuarios': usuarios})
 
 @login_required

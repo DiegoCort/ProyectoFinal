@@ -15,4 +15,5 @@ urlpatterns = [
     path('futbolista/', vista_futbolista, name='vista_futbolista'),
     path('tecnico/', vista_tecnico, name='vista_tecnico'),
 
+
 ]
